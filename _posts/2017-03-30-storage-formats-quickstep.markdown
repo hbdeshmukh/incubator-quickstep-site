@@ -39,11 +39,15 @@ The first storage format we will look at is row store, which is one of the more 
 
 The figure below represents how a row store format for our toy example would look like in the memory. The offsets indicate how far is the memory location from the beginning of the block. 
 
+![Row Store](../assets/storage-formats-row-store.jpg)
+
 In the row store format, a tuple is stored as it looks in the above table. In the memory, the ID (101) of the first tuple is storead at some address, and it is followed by the age field for that tuple (30), and then the name field (Jennifer). In the memory location right after the first tuple, the second tuple is stored, and so on.
 
 <h2>Column Store</h2>
 
 Let's now take a look at column store format. The figure below depicts how the column store is laid out in memory for our toy example. 
+
+![Column Store](../assets/storage-formats-column-store.jpg)
 
 In the column store format, the values from the same column are stored together. The order in which the values from a column are stored remains the same for all the columns. Notice the ID values 101, 102, 1033 are stored contiguously. The corresponding Age fields 30, 25 and 35 are stored contiguously and likewise for the Name column.
 
@@ -52,6 +56,8 @@ In the column store format, the values from the same column are stored together.
 Compression is a standard technique to store the same data with lower storage requirement. There is a large body of literature on various compression techniques, which we won't cover here. Let's look at how compression can be applied in our toy example. If we look at the ID column, it has three values 101, 102 and 103. If they are stored as regular integers, each of them will occupy 4 bytes of memory. Interestingly, we can reduce the memory consumed by these three values. Observe that these three values are very close to 100. If we remember the base value 100 and only record each value's difference from 100; all we need to store is 1, 2, and 3. To store these three offsets, we don't even need a 4 byte integer, a 1-byte counter is enough.
 
 To bundle it together, the picture below shows the compressed column store format in which the compression is applied on the ID column. 
+
+![Column Store with Compression](../assets/storage-formats-compressed-column-store.jpg)
 
 Observe the memory occupied by the three tuples together is only 43 bytes, compared to 48 bytes in the row store and the column store format. As the number of tuples increase, there may be more opportunities for compression and thereby more memory savings.
 
