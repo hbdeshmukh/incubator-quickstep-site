@@ -127,7 +127,7 @@ Name VARCHAR(8) NOT NULL
 
 For folks interested in looking at the source code for these storage formats, I will provide the links to relevant source code files. Our code is well documented (doxygen) for the most part, so it should be easier to read.
 
-[Parser the block properties](https://github.com/apache/incubator-quickstep/blob/master/parser/ParseBlockProperties.hpp)
+[Parsing the block properties](https://github.com/apache/incubator-quickstep/blob/master/parser/ParseBlockProperties.hpp)
 
 [Row store implementation](https://github.com/apache/incubator-quickstep/blob/master/storage/SplitRowStoreTupleStorageSubBlock.hpp)
 
